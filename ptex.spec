@@ -5,14 +5,14 @@
 Summary:	Ptex - texture mapping system by Walt Disney Animation Studios
 Summary(pl.UTF-8):	Ptex - system odwzorowywania tekstur z Walt Disney Animation Studios
 Name:		ptex
-Version:	2.0.32
+Version:	2.0.42
 Release:	1
 License:	BSD
 Group:		Libraries
 # (not precisely: see github for releases, then fetch appropriate tarball)
 #Source0Download: https://github.com/wdas/ptex
-Source0:	https://github.com/wdas/ptex/tarball/v2.0.32#/%{name}-%{version}.tar.gz
-# Source0-md5:	6dd8b33943e7328e20f7914422802131
+Source0:	https://github.com/wdas/ptex/tarball/v%{version}?/%{name}-%{version}.tar.gz
+# Source0-md5:	80181532ab9ef9dcc729344f45415c8b
 URL:		http://ptex.us/
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
@@ -80,7 +80,7 @@ API and internal documentation for Ptex library.
 Dokumentacja API biblioteki Ptex.
 
 %prep
-%setup -q -n wdas-ptex-2a093f9
+%setup -q -n wdas-ptex-7e2cb22
 
 %build
 %{__make} -C src/ptex \
