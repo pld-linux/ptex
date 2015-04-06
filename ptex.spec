@@ -83,11 +83,11 @@ Dokumentacja API biblioteki Ptex.
 %setup -q -n wdas-ptex-7e2cb22
 
 %build
-%{__make} -C src/ptex \
+%{__make} -j1 -C src/ptex \
 	CXX="%{__cxx}" \
 	DEBUG="%{rpmcxxflags} %{rpmcppflags} -fPIC -DNDEBUG"
 
-%{__make} -C src/utils \
+%{__make} -j1 -C src/utils \
 	CXX="%{__cxx}" \
 	DEBUG="%{rpmcxxflags} %{rpmcppflags} -DNDEBUG"
 
