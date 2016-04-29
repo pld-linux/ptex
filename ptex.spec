@@ -1,12 +1,12 @@
 #
 # Conditional build:
 %bcond_without	apidocs		# do not build and package API docs
-#
+
 Summary:	Ptex - texture mapping system by Walt Disney Animation Studios
 Summary(pl.UTF-8):	Ptex - system odwzorowywania tekstur z Walt Disney Animation Studios
 Name:		ptex
 Version:	2.0.42
-Release:	2
+Release:	3
 License:	BSD
 Group:		Libraries
 # (not precisely: see github for releases, then fetch appropriate tarball)
@@ -38,9 +38,8 @@ Animation Studios do renderowania z jakością produkcyjną:
 - Format plików Ptex może wydajnie przechowywać setki tysięcy obrazów
   tekstur w pojedynczym pliku.
 - API Ptex udostępnia operacje we/wy z buforowaniem oraz wysokiej
-  jakości filtrowanie - to wystarczy, żeby dodać obsługę plików Ptex
-  do renderera o jakości produkcyjnej lub aplikacji do tworzenia
-  tekstur.
+  jakości filtrowanie - to wystarczy, żeby dodać obsługę plików Ptex do
+  renderera o jakości produkcyjnej lub aplikacji do tworzenia tekstur.
 
 %package devel
 Summary:	Header files for Ptex library
@@ -72,6 +71,9 @@ Statyczna biblioteka Ptex.
 Summary:	Ptex API documentation
 Summary(pl.UTF-8):	Dokumentacja API biblioteki Ptex
 Group:		Documentation
+%if "%{_rpmversion}" >= "5"
+BuildArch:	noarch
+%endif
 
 %description apidocs
 API and internal documentation for Ptex library.
@@ -80,7 +82,7 @@ API and internal documentation for Ptex library.
 Dokumentacja API biblioteki Ptex.
 
 %prep
-%setup -q -n wdas-ptex-7e2cb22
+%setup -q -n wdas-%{name}-7e2cb22
 
 %build
 %{__make} -j1 -C src/ptex \
