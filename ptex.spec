@@ -5,18 +5,18 @@
 Summary:	Ptex - texture mapping system by Walt Disney Animation Studios
 Summary(pl.UTF-8):	Ptex - system odwzorowywania tekstur z Walt Disney Animation Studios
 Name:		ptex
-Version:	2.1.28
+Version:	2.3.2
 Release:	1
 License:	BSD
 Group:		Libraries
-# (not precisely: see github for releases, then fetch appropriate tarball)
-#Source0Download: https://github.com/wdas/ptex
+#Source0Download: https://github.com/wdas/ptex/releases
 Source0:	https://github.com/wdas/ptex/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	ce4eb665f686f8391968fa137113bc69
+# Source0-md5:	d409eecde96f89517bc271b1d4909bc5
 URL:		http://ptex.us/
-BuildRequires:	cmake
+BuildRequires:	cmake >= 3.8.0
 %{?with_apidocs:BuildRequires:	doxygen}
 BuildRequires:	libstdc++-devel
+BuildRequires:	pkgconfig
 BuildRequires:	zlib-devel
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
@@ -85,11 +85,13 @@ Dokumentacja API biblioteki Ptex.
 %prep
 %setup -q
 
+# see CMakeLists.txt:34-38 (if (NOT DEFINED PTEX_VER) ...)
+echo %{version} > version
+
 %build
 mkdir build
 cd build
-%{cmake} ../ \
-	-DCMAKE_CXX_FLAGS_RELEASE="%{rpmcxxflags}"
+%cmake ..
 
 %{__make}
 
@@ -120,6 +122,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %{_includedir}/Ptex*.h
+%{_datadir}/cmake/Ptex
 
 %files static
 %defattr(644,root,root,755)
