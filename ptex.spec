@@ -115,7 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE src/doc/filterfootprint.txt
 %attr(755,root,root) %{_bindir}/ptxinfo
-%attr(755,root,root) %{_libdir}/libPtex.so.*
+%attr(755,root,root) %{_libdir}/libPtex.so.2.4
 
 %files devel
 %defattr(644,root,root,755)
