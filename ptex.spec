@@ -5,13 +5,13 @@
 Summary:	Ptex - texture mapping system by Walt Disney Animation Studios
 Summary(pl.UTF-8):	Ptex - system odwzorowywania tekstur z Walt Disney Animation Studios
 Name:		ptex
-Version:	2.3.2
+Version:	2.4.1
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/wdas/ptex/releases
 Source0:	https://github.com/wdas/ptex/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	d409eecde96f89517bc271b1d4909bc5
+# Source0-md5:	2830df5248e87a3ac2e12228ba4ce549
 URL:		http://ptex.us/
 BuildRequires:	cmake >= 3.8.0
 %{?with_apidocs:BuildRequires:	doxygen}
@@ -113,12 +113,13 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc src/doc/{FilterFootprint.html,License.txt}
+%doc LICENSE src/doc/filterfootprint.txt
 %attr(755,root,root) %{_bindir}/ptxinfo
-%attr(755,root,root) %{_libdir}/libPtex.so
+%attr(755,root,root) %{_libdir}/libPtex.so.*
 
 %files devel
 %defattr(644,root,root,755)
+%attr(755,root,root) %{_libdir}/libPtex.so
 %{_includedir}/Ptex*.h
 %{_datadir}/cmake/Ptex
 
