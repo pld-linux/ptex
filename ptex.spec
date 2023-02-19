@@ -6,7 +6,7 @@ Summary:	Ptex - texture mapping system by Walt Disney Animation Studios
 Summary(pl.UTF-8):	Ptex - system odwzorowywania tekstur z Walt Disney Animation Studios
 Name:		ptex
 Version:	2.4.1
-Release:	1
+Release:	2
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/wdas/ptex/releases
