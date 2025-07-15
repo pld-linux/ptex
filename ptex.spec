@@ -84,7 +84,7 @@ Dokumentacja API biblioteki Ptex.
 
 %prep
 %setup -q
-%patch0 -p1
+%patch -P0 -p1
 
 # see CMakeLists.txt:47-58 (if (NOT DEFINED PTEX_VER) ...)
 echo %{version} > version
