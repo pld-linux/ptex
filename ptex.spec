@@ -1,22 +1,24 @@
 #
 # Conditional build:
-%bcond_without	apidocs		# do not build and package API docs
+%bcond_without	apidocs		# API documentation
 
 Summary:	Ptex - texture mapping system by Walt Disney Animation Studios
 Summary(pl.UTF-8):	Ptex - system odwzorowywania tekstur z Walt Disney Animation Studios
 Name:		ptex
-Version:	2.4.3
+Version:	2.5.4
 Release:	1
 License:	BSD
 Group:		Libraries
 #Source0Download: https://github.com/wdas/ptex/tags
 Source0:	https://github.com/wdas/ptex/archive/v%{version}/%{name}-%{version}.tar.gz
-# Source0-md5:	dcea5a45ab22315c8dfb294682618e18
+# Source0-md5:	ea4862e1107b9efce5ff87c466d015df
 Patch0:		%{name}-pc.patch
+Patch1:		%{name}-shared.patch
 URL:		http://ptex.us/
-BuildRequires:	cmake >= 3.8.0
+BuildRequires:	cmake >= 3.10.0
 %{?with_apidocs:BuildRequires:	doxygen}
-BuildRequires:	libstdc++-devel
+BuildRequires:	libdeflate-devel
+BuildRequires:	libstdc++-devel >= 6:7
 BuildRequires:	pkgconfig
 BuildRequires:	rpm-build >= 4.6
 BuildRequires:	zlib-devel
@@ -49,7 +51,8 @@ Summary:	Header files for Ptex library
 Summary(pl.UTF-8):	Pliki nagłówkowe biblioteki Ptex
 Group:		Development/Libraries
 Requires:	%{name} = %{version}-%{release}
-Requires:	libstdc++-devel
+Requires:	libdeflate-devel
+Requires:	libstdc++-devel >= 6:7
 Requires:	zlib-devel
 
 %description devel
@@ -63,6 +66,7 @@ Summary:	Static Ptex library
 Summary(pl.UTF-8):	Statyczna biblioteka Ptex
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}-%{release}
+Requires:	libdeflate-static
 
 %description static
 Static Ptex library.
@@ -85,6 +89,7 @@ Dokumentacja API biblioteki Ptex.
 %prep
 %setup -q
 %patch -P0 -p1
+%patch -P1 -p1
 
 # see CMakeLists.txt:47-58 (if (NOT DEFINED PTEX_VER) ...)
 echo %{version} > version
@@ -118,11 +123,11 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc LICENSE src/doc/filterfootprint.txt
 %attr(755,root,root) %{_bindir}/ptxinfo
-%attr(755,root,root) %{_libdir}/libPtex.so.2.4
+%{_libdir}/libPtex.so.2.5
 
 %files devel
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_libdir}/libPtex.so
+%{_libdir}/libPtex.so
 %{_includedir}/Ptex*.h
 %{_libdir}/cmake/Ptex
 %{_pkgconfigdir}/ptex.pc
